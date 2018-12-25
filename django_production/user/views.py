@@ -1,3 +1,6 @@
 from django.shortcuts import render
 
-# Create your views here.
+def send_email(request):
+    print('COUCOU')
+    # send_email_task.delay("guillaume.guerdoux@mayerprezioso.com")
+    return render(request, 'home.html')
