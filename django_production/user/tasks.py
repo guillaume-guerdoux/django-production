@@ -5,5 +5,5 @@ from django.core.mail import mail_managers
 def send_email_task():
     """ This function sends an email to Mayer & Co collaborateurs
     """
-    mail_managers(subject="Test from Django production", message="Message de test de django production avec Celery")
+    mail_managers(subject="Test V2 from Django production", message="Message de test de django production avec Celery")
     return True
