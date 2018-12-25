@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
+import json
+
+config_file = json.load(open("django_production/config.json"))
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -54,7 +57,7 @@ ROOT_URLCONF = 'django_production.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -118,3 +121,26 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+MANAGERS = [('Guillaume', 'guillaume.guerdoux@mayerprezioso.com'),
+            #('Julie', 'julie.vanoni@mayerprezioso.com'),
+            #('Baptiste', 'baptiste.prezioso@mayerprezioso.com')
+            ]
+
+#http://ruddra.com/2015/09/18/implementation-of-forgot-reset-password-feature-in-django/
+# TODO : Understand everything : tests / more professional email / cryted password
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'guillaume@cilver.fr'
+SERVER_EMAIL = 'guillaume@cilver.fr'
+EMAIL_HOST = 'smtp.cilver.fr'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'guillaume@cilver.fr'
+EMAIL_HOST_PASSWORD = config_file['guillaume_password']
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+# CELERY REDIS CONFIGURATION
+REDIS_HOST = 'localhost'
+REDIS_PORT = '6379'
+BROKER_URL = 'redis://' + REDIS_HOST + ':' + REDIS_PORT + '/0'
+BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 3600}
+CELERY_RESULT_BACKEND = 'redis://' + REDIS_HOST + ':' + REDIS_PORT + '/0'

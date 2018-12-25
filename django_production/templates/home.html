@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>{% block title %}Django Production{% endblock %}</title>
+		{% block stylesheets %}
+		<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+		<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+		{% endblock %}
+	</head>
+	<body>
+		<div class="wrapper">
+      <div class="container">
+        <div class="text-center">
+          <h1> Welcome on Django Production </h1>
+          <button class="btn-primary"> Tester l'envoi de mail avec Celery </button>
+        </div>
+      </div>
+		</div>
+  	{% block javascripts %}
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+			<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  	{% endblock %}
+  </body>
+</html>
