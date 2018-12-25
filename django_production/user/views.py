@@ -1,6 +1,6 @@
 from django.shortcuts import render
+from user.tasks import send_email_task
 
 def send_email(request):
-    print('COUCOU')
-    # send_email_task.delay("guillaume.guerdoux@mayerprezioso.com")
+    send_email_task.delay()
     return render(request, 'home.html')
