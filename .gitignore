@@ -1,3 +1,10 @@
+# CONFIG FILE
+django_production/django_production/config.json
+
+GuillaumeDjangoProductionInstance.pem
+
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
