@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 import os
 import json
 
-config_file = json.load(open("django_production/config.json"))
+config_file = json.load(open("django_production/localsettings.json"))
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -23,13 +23,15 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '50fq(^e2r)*gv&s6o!qsf_6))or7t7-owy(=sf9ivbi*&eraje'
+SECRET_KEY = config_file['secret_key']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+if config_file['debug'] == "True":
+    DEBUG = True
+else:
+    DEBUG = False
 
-ALLOWED_HOSTS = ['*']
-
+ALLOWED_HOSTS = list(config_file['allowed_hosts'])
 
 # Application definition
 
@@ -132,12 +134,12 @@ MANAGERS = [('Guillaume', 'guillaume.guerdoux@mayerprezioso.com'),
 #http://ruddra.com/2015/09/18/implementation-of-forgot-reset-password-feature-in-django/
 # TODO : Understand everything : tests / more professional email / cryted password
 EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = 'guillaume@cilver.fr'
-SERVER_EMAIL = 'guillaume@cilver.fr'
-EMAIL_HOST = 'smtp.cilver.fr'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'guillaume@cilver.fr'
-EMAIL_HOST_PASSWORD = config_file['guillaume_password']
+DEFAULT_FROM_EMAIL = config_file['sent_address']
+SERVER_EMAIL = config_file['server_email']
+EMAIL_HOST = config_file['email_host']
+EMAIL_PORT = config_file['email_port']
+EMAIL_HOST_USER = config_file['email_host_user']
+EMAIL_HOST_PASSWORD = config_file['email_password']
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 # CELERY REDIS CONFIGURATION
