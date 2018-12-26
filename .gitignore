@@ -1,7 +1,8 @@
 # CONFIG FILE
-django_production/django_production/config.json
+django_production/django_production/localsettings.json
 
 GuillaumeDjangoProductionInstance.pem
+.venv/
 
 
 
